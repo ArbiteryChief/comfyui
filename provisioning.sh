@@ -24,6 +24,10 @@ NODES=(
     "https://github.com/kijai/ComfyUI-KJNodes"
 )
 
+EXTENSIONS=(
+    "https://github.com/thu-ml/SageAttention.git"
+)
+
 WORKFLOWS=(
 
 )
@@ -62,6 +66,7 @@ function provisioning_start() {
     provisioning_print_header
     provisioning_get_apt_packages
     provisioning_get_nodes
+    provisioning_get_extensions
     provisioning_get_pip_packages
     provisioning_get_files \
         "${COMFYUI_DIR}/models/diffusion_models/mochi" \
@@ -118,6 +123,37 @@ function provisioning_get_nodes() {
             if [[ -e $requirements ]]; then
                 pip install --no-cache-dir -r "${requirements}"
             fi
+        fi
+    done
+}
+
+function provisioning_get_extensions() {
+    EXT_DIR="${WORKSPACE}/extensions"
+    mkdir -p "$EXT_DIR"
+    
+    for repo in "${EXTENSIONS[@]}"; do
+        dir="${repo##*/}"
+        path="${EXT_DIR}/${dir}"
+        requirements="${path}/requirements.txt"
+
+        if [[ -d $path ]]; then
+            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
+                printf "Updating extension: %s...\n" "${repo}"
+                ( cd "$path" && git pull )
+                if [[ -e $requirements ]]; then
+                    pip install --no-cache-dir -r "$requirements"
+                fi
+                # Install extension (editable mode)
+                ( cd "$path" && pip install -e . )
+            fi
+        else
+            printf "Downloading extension: %s...\n" "${repo}"
+            git clone "${repo}" "${path}" --recursive
+            if [[ -e $requirements ]]; then
+                pip install --no-cache-dir -r "$requirements"
+            fi
+            # Install extension (editable mode)
+            ( cd "$path" && pip install -e . )
         fi
     done
 }
