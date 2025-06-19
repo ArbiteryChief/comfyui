@@ -1,0 +1,578 @@
+{
+  "id": "6ba04fb2-bb23-4d1b-b565-9fa13376f35a",
+  "revision": 0,
+  "last_node_id": 12,
+  "last_link_id": 12,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "MochiTextEncode",
+      "pos": [
+        805,
+        645
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiTextEncode"
+      },
+      "widgets_values": [
+        "no cartoon, no blur",
+        1,
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "MochiTextEncode",
+      "pos": [
+        788,
+        363
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiTextEncode"
+      },
+      "widgets_values": [
+        "a beautifull underwater environment, with exotic alien fish swimming around.",
+        1,
+        true
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPLoader",
+      "pos": [
+        462,
+        540
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1,
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "stable_diffusion",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "MochiVAELoader",
+      "pos": [
+        1613,
+        226
+      ],
+      "size": [
+        272.36663818359375,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "torch_compile_args",
+          "shape": 7,
+          "type": "MOCHICOMPILEARGS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mochi_vae",
+          "type": "MOCHIVAE",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiVAELoader"
+      },
+      "widgets_values": [
+        "mochi/mochi_preview_vae_decoder_bf16.safetensors",
+        "bf16"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "CreateVideo",
+      "pos": [
+        2010,
+        442
+      ],
+      "size": [
+        270,
+        78
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 10
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "VIDEO",
+          "type": "VIDEO",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CreateVideo"
+      },
+      "widgets_values": [
+        30
+      ]
+    },
+    {
+      "id": 12,
+      "type": "SaveVideo",
+      "pos": [
+        2008,
+        601
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "VIDEO",
+          "link": 12
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "SaveVideo"
+      },
+      "widgets_values": [
+        "video/ComfyUI",
+        "auto",
+        "auto"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "GetImageSizeAndCount",
+      "pos": [
+        1721,
+        406
+      ],
+      "size": [
+        190.79998779296875,
+        86
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            10
+          ]
+        },
+        {
+          "label": "width",
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "label": "height",
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "label": "count",
+          "name": "count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "f7eb33abc80a2aded1b46dff0dd14d07856a7d50",
+        "Node name for S&R": "GetImageSizeAndCount"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 3,
+      "type": "MochiSampler",
+      "pos": [
+        1310,
+        457
+      ],
+      "size": [
+        270,
+        322
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MOCHIMODEL",
+          "link": 5
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "cfg_schedule",
+          "shape": 7,
+          "type": "FLOAT",
+          "link": null
+        },
+        {
+          "name": "opt_sigmas",
+          "shape": 7,
+          "type": "SIGMAS",
+          "link": null
+        },
+        {
+          "name": "samples",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "fastercache",
+          "shape": 7,
+          "type": "FASTERCACHEARGS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiSampler"
+      },
+      "widgets_values": [
+        848,
+        480,
+        163,
+        50,
+        4.5,
+        1106281119716066,
+        "fixed"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "MochiDecode",
+      "pos": [
+        1661,
+        568
+      ],
+      "size": [
+        301.33331298828125,
+        246
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vae",
+          "type": "MOCHIVAE",
+          "link": 8
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiDecode"
+      },
+      "widgets_values": [
+        true,
+        true,
+        40,
+        240,
+        424,
+        0.25000000000000006,
+        0.25000000000000006,
+        false
+      ]
+    },
+    {
+      "id": 1,
+      "type": "MochiModelLoader",
+      "pos": [
+        1295,
+        181
+      ],
+      "size": [
+        270,
+        174
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trigger",
+          "shape": 7,
+          "type": "CONDITIONING",
+          "link": null
+        },
+        {
+          "name": "compile_args",
+          "shape": 7,
+          "type": "MOCHICOMPILEARGS",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mochi_model",
+          "type": "MOCHIMODEL",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "kijai/ComfyUI-MochiWrapper",
+        "ver": "e1bd05240ac31b72166e9d952c75dd5735352311",
+        "Node name for S&R": "MochiModelLoader"
+      },
+      "widgets_values": [
+        "mochi/mochi_preview_dit_bf16.safetensors",
+        "bf16",
+        "sdpa",
+        false,
+        "default"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      5,
+      0,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      5,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      4,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      4,
+      6,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      1,
+      0,
+      3,
+      0,
+      "MOCHIMODEL"
+    ],
+    [
+      8,
+      2,
+      0,
+      9,
+      0,
+      "MOCHIVAE"
+    ],
+    [
+      9,
+      9,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      10,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      11,
+      3,
+      0,
+      9,
+      1,
+      "LATENT"
+    ],
+    [
+      12,
+      11,
+      0,
+      12,
+      0,
+      "VIDEO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.18.9"
+  },
+  "version": 0.4
+}
