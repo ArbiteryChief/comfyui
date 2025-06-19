@@ -45,6 +45,8 @@ VAE_MODELS=(
 )
 
 ESRGAN_MODELS=(
+    "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x_NMKD-Siax_200k.pth"
+    "https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x_NMKD-Superscale-SP_178000_G.pth"
 )
 
 CONTROLNET_MODELS=(
