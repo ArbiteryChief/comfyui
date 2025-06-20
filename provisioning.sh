@@ -19,8 +19,6 @@ PIP_PACKAGES=(
 NODES=(
     "https://github.com/ltdrdata/ComfyUI-Manager"
     "https://github.com/cubiq/ComfyUI_essentials"
-    "https://github.com/kijai/ComfyUI-MochiWrapper"
-    "https://github.com/logtd/ComfyUI-MochiEdit"
     "https://github.com/kijai/ComfyUI-KJNodes"
 )
 
@@ -33,7 +31,7 @@ WORKFLOWS=(
 )
 
 DIFFUSION_MODELS=(
-    "https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_dit_bf16.safetensors"
+    "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/diffusion_models/hunyuan_video_t2v_720p_bf16.safetensors"
 
 )
 
@@ -44,8 +42,8 @@ LORA_MODELS=(
 )
 
 VAE_MODELS=(
-    "https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_vae_decoder_bf16.safetensors"
-    "https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_vae_encoder_bf16_.safetensors"
+    "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/vae/hunyuan_video_vae_bf16.safetensors"
+    
 )
 
 ESRGAN_MODELS=(
@@ -56,8 +54,9 @@ ESRGAN_MODELS=(
 CONTROLNET_MODELS=(
 )
 
-CLIP_MODELS=(
-    "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp16.safetensors"
+TEXT_ENCODERS=(
+    "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/llava_llama3_fp16.safetensors"
+    "https://huggingface.co/Comfy-Org/HunyuanVideo_repackaged/resolve/main/split_files/text_encoders/clip_l.safetensors"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
@@ -69,7 +68,7 @@ function provisioning_start() {
     provisioning_get_extensions
     provisioning_get_pip_packages
     provisioning_get_files \
-        "${COMFYUI_DIR}/models/diffusion_models/mochi" \
+        "${COMFYUI_DIR}/models/diffusion_models" \
         "${DIFFUSION_MODELS[@]}"
     provisioning_get_files \
         "${COMFYUI_DIR}/models/unet" \
@@ -87,8 +86,8 @@ function provisioning_start() {
         "${COMFYUI_DIR}/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
     provisioning_get_files \
-        "${COMFYUI_DIR}/models/clip" \
-        "${CLIP_MODELS[@]}"
+        "${COMFYUI_DIR}/models/text_encoders" \
+        "${TEXT_ENCODERS[@]}"
     provisioning_print_end
 }
 
